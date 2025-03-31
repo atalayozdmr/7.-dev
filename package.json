@@ -1,0 +1,17 @@
+{
+  "name": "odev-7",
+  "version": "1.0.0",
+  "description": "NodeJS ödevi ",
+  "main": "main.js",
+  "scripts": {
+    "start": "node.main.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "js",
+    "homework",
+    "basics"
+  ],
+  "author": "Atalay Özdemir",
+  "license": "ISC"
+}
