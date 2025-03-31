@@ -50,23 +50,31 @@ function listNotes() {
 
 
 function deleteNote(noteId) {
-    try {
-      const data = fs.readFileSync(filePath, 'utf8');
-      const notes = JSON.parse(data);
-  
-   
-      const updatedNotes = notes.filter(note => note.id.toString() !== noteId.toString());
-  
-      if (updatedNotes.length === notes.length) {
-        console.log(`❌ ID (${noteId}) ile eşleşen not bulunamadı.`);
-      } else {
-        fs.writeFileSync(filePath, JSON.stringify(updatedNotes, null, 2));
-        console.log(`🗑️ Not başarıyla silindi. ID: ${noteId}`);
-      }
-    } catch (err) {
-      console.error('❌ Hata oluştu:', err);
+  try {
+    const data = fs.readFileSync(filePath, 'utf8');
+    let notes = JSON.parse(data);
+
+    
+    const updatedNotes = notes.filter(note => note.id !== Number(noteId));
+
+    if (updatedNotes.length === notes.length) {
+      console.log(`❌ ID (${noteId}) ile eşleşen not bulunamadı.`);
+    } else {
+      
+      const reorderedNotes = updatedNotes.map((note, index) => ({
+        id: index + 1,
+        content: note.content
+      }));
+
+      fs.writeFileSync(filePath, JSON.stringify(reorderedNotes, null, 2));
+      console.log(`🗑️ Not başarıyla silindi. ID: ${noteId}`);
+      console.log(`🔄 ID'ler yeniden düzenlendi.`);
     }
+  } catch (err) {
+    console.error('❌ Hata oluştu:', err);
   }
+}
+
   
 
 
